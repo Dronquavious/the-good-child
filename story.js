@@ -167,7 +167,7 @@ const story = (() => {
             ? ending('retreat', 'One step back', 'At the threshold, Red recognizes the stranger from the crossing. She changes her mind, steps back, and gets away while the door is still within reach.')
             : ending('help', 'A light on the lane', 'The wolf moves toward the door. The neighbor calls across the lane, and Red uses the interruption to step back to the light.');
         }
-        return { wolf, cottage: 'wolf', route, clue, door, ending: result };
+        return { wolf, cottage: wolfChoice ? 'wolf' : 'grandmother', route, clue, door, ending: result };
       }
     }
   };

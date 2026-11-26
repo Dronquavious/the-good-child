@@ -1,53 +1,80 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#151d1a" />
-  <title>The Good Child — A Little Red Riding Hood Game</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14231e">
+  <title>The Good Child</title>
+  <link rel="icon" href="hood.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="story.js" defer></script>
+  <script src="forest.js" defer></script>
+  <script src="game.js" defer></script>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">✦</span> THE GOOD CHILD <small>an interactive fairy-tale study</small></div>
-      <button id="researchBtn" type="button" class="header-button" aria-label="Read research notes">RESEARCH NOTES <span>↗</span></button>
+      <div class="brand"><img src="hood.svg" alt="" width="29" height="29"> The Good Child</div>
+      <button id="researchButton" class="quiet-button" type="button">Research notes</button>
     </header>
 
-    <section class="game-frame" aria-label="Game window">
-      <div class="game-topline">
-        <div class="chapter-label" id="chapterLabel">A story told three ways</div>
-        <div class="progress" id="progressDots" aria-label="Chapter progress"><span></span><span></span><span></span></div>
-        <div class="hud-hint" id="hudHint">5–8 MIN · 3 TELLINGS</div>
+    <section class="book" id="book" data-mode="start" aria-label="The Good Child">
+      <div class="book-bar">
+        <p id="chapterLabel">Little Red Riding Hood</p>
+        <ol id="chapterProgress" aria-label="Chapter progress" hidden>
+          <li>Perrault</li><li>Grimm</li><li>Remix</li>
+        </ol>
+        <p id="stepLabel">Three tellings</p>
       </div>
-      <div class="canvas-wrap">
-        <canvas id="game" width="960" height="520" aria-label="Illustrated forest with a small red-cloaked traveler"></canvas>
-        <div id="interactPrompt" class="interact-prompt hidden" aria-live="polite">PRESS <kbd>E</kbd> TO TALK</div>
-        <div id="sceneOverlay" class="overlay"></div>
+      <div class="spread">
+        <div class="forest-page">
+          <div class="map">
+            <canvas id="game" width="960" height="560" aria-label="Illustrated top-down forest"></canvas>
+            <button id="mapMarker" class="map-marker" type="button" hidden><span aria-hidden="true">✦</span><span class="visually-hidden" id="mapMarkerLabel"></span></button>
+          </div>
+          <div class="map-caption">
+            <span id="mapCaption">The road to Grandmother’s</span>
+            <span id="provision"></span>
+          </div>
+          <div id="touchControls" class="touch-controls" hidden>
+            <div class="dpad" aria-label="Movement controls">
+              <button data-dir="left" aria-label="Move left">←</button>
+              <button data-dir="up" aria-label="Move up">↑</button>
+              <button data-dir="down" aria-label="Move down">↓</button>
+              <button data-dir="right" aria-label="Move right">→</button>
+            </div>
+            <button id="touchAction" class="quiet-button" type="button">Interact</button>
+          </div>
+        </div>
+        <article id="page" class="paper"></article>
       </div>
-      <div class="game-bottomline"><span id="chapterFooter">A GOOD CHILD DOES WHAT?</span><span id="controlsFooter">MOVE <b>WASD / ↑↓←→</b> · INTERACT <b>E / SPACE</b></span></div>
     </section>
 
-    <div class="below">
-      <p><b>RESEARCH QUESTION</b> How do different versions of <i>Little Red Riding Hood</i> use obedience and disobedience to define what makes a child “good”?</p>
-      <p class="credit">An interpretive game, not a literal reconstruction. Source events and invented “what if?” outcomes are distinguished in each chapter.</p>
-    </div>
+    <footer class="below">
+      <p>How do different versions of <i>Little Red Riding Hood</i> use obedience and disobedience to define what makes a child “good”?</p>
+      <p>German / Lit Trans 280</p>
+    </footer>
+    <noscript><p>Enable JavaScript to play. <a href="research.html">Read the research and artist’s statement.</a></p></noscript>
   </main>
 
-  <dialog id="researchDialog" class="research-dialog">
-    <div class="research-head"><div><small>THE STUDY BEHIND THE GAME</small><h2>Research notes</h2></div><button id="closeResearch" class="header-button" aria-label="Close notes">✕ CLOSE</button></div>
-    <p>The same choices do not carry the same meaning in every telling. This game uses three <strong>interpretive lenses</strong>, each tied to specific story details.</p>
-    <div class="note-card"><h3>1697 — Charles Perrault</h3><p>Red brings cakes and a pot of butter, gives away her grandmother's location, and follows the longer route, gathering nuts, chasing butterflies, and picking flowers. Her mother <em>does not</em> explicitly forbid leaving the path. The tale ends without a rescue and appends a warning about charming wolves and misplaced trust.</p><p class="mini-cite">“Little Red Riding Hood,” in <i>The Classic Fairy Tales</i>, ed. Maria Tatar (Norton, 1999), pp. 11–13.</p></div>
-    <div class="note-card"><h3>1857 — Jacob & Wilhelm Grimm</h3><p>Red carries cake and wine. Her mother tells her not to leave the path, to mind her manners, and to say good morning. After the wolf distracts her with flowers and birds, a huntsman cuts both victims out of the wolf and Red helps fill its belly with stones. In a second encounter, Red and her grandmother foil another wolf with sausage water and a trough.</p><p class="mini-cite"><i>Rotkäppchen</i>, <i>Kinder- und Hausmärchen</i>, vol. 1 (1857), pp. 140–44; trans. D. L. Ashliman.</p></div>
-    <div class="note-card"><h3>20th-century parodies — A new kind of Red</h3><p>James Thurber's “The Little Girl and the Wolf” (1940) and Roald Dahl's “Little Red Riding Hood and the Wolf” (1982) depict a Red who recognizes or defeats the wolf herself. This game's final chapter is an original, nonviolent <em>interpretation inspired by</em> those role reversals, not a scene copied from either text.</p><p class="mini-cite">James Thurber, <i>Fables for Our Time</i> (1940), pp. 5–6; Roald Dahl, <i>Revolting Rhymes</i> (1982).</p></div>
-    <p class="note-bottom">The research argument is deliberately open to debate: is a “good” child obedient, cautious, teachable, or capable of acting independently? Your choices make that question playable.</p>
+  <dialog id="researchDialog" aria-labelledby="researchTitle">
+    <div class="research-head">
+      <h2 id="researchTitle">Research notes</h2>
+      <form method="dialog"><button class="quiet-button" type="submit" autofocus>Close</button></form>
+    </div>
+    <section>
+      <h3>1697 · Charles Perrault</h3>
+      <p>The cakes, butter, mill, and two roads come from the tale. Mother sends Red on an errand. The warning about the danger of apparently gentle wolves comes from Perrault’s final moral. <a href="research.html#perrault">Source citation</a></p>
+    </section>
+    <section>
+      <h3>1857 · Jacob and Wilhelm Grimm</h3>
+      <p>Mother’s rules concern the path and proper manners. The first wolf is followed by a second encounter in which Grandmother and Red work together. <a href="research.html#grimm">Source citation</a></p>
+    </section>
+    <section>
+      <h3>Original modern remix inspired by Thurber and Dahl</h3>
+      <p>The published parodies let Red defeat the wolf. The lantern, footprints, and nonviolent responses are original to this game. <a href="research.html#primary">Primary sources</a></p>
+    </section>
+    <p><a href="research.html">Artist’s statement and full works cited</a></p>
   </dialog>
-
-  <div id="touchControls" class="touch-controls" aria-label="Touch game controls">
-    <div class="dpad"><button data-dir="up" aria-label="Move up">▲</button><div><button data-dir="left" aria-label="Move left">◀</button><button data-dir="down" aria-label="Move down">▼</button><button data-dir="right" aria-label="Move right">▶</button></div></div>
-    <button id="touchAction" class="touch-action">INTERACT</button>
-  </div>
-
-  <script src="game.js"></script>
 </body>
 </html>

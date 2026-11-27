@@ -28,7 +28,3 @@ node --test tests/story.test.js
 ```
 
 To preview the same static entry point served over HTTP, run `python3 -m http.server 8000` in this folder and open [localhost:8000](http://localhost:8000/).
-
-## GitHub Pages
-
-After the repository is pushed to GitHub, open **Settings → Pages**, select **Deploy from a branch**, and choose the publishing branch and **/(root)**. The repository root contains both the game and the research page. Open the published URL in a private browser window and check the game and Works cited link. [GitHub Pages publishing documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
